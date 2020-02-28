@@ -1,9 +1,10 @@
 provider "google" {
-  credentials = file("bergqvist-sandbox-91e93ec936cb.json")
+  version = "3.10.0"
+  credentials = file(var.credentials_file)
 
-  project = "bergqvist-sandbox"
-  region = "us-east1"
-  zone = "us-east1-c"
+  project = var.project
+  region = var.region
+  zone = var.zone
 }
 
 resource "random_id" "db_name_suffix" {
@@ -16,6 +17,17 @@ resource "google_sql_database_instance" "postgres" {
 
   settings{
     tier = "db-f1-micro"
+    user_labels = {
+      "environment" = "development"
+    }
+    maintenance_window {
+      day  = "1"
+      hour = "4"
+    }
+    backup_configuration {
+      enabled = true
+      start_time = "04:30"
+    }
   }
 }
 
