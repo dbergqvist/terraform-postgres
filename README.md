@@ -8,3 +8,8 @@ I have created a secret.tfvars file that I don't version control. The file conta
 project = "<PROJECT_ID>"
 credentials_file = "<NAME>.json"
 ```
+I then use var-file to load it
+
+```bash
+terraform apply -var-file="secret.tfvars"
+```
