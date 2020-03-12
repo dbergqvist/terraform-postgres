@@ -43,7 +43,7 @@ resource "google_sql_database_instance" "postgres" {
 }
 
 resource "google_sql_user" "users" {
-  name     = "bergqvist"
+  name     = "janedoe"
   instance = google_sql_database_instance.postgres.name
   password = "changeme"
 }
